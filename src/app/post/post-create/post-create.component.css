@@ -1,0 +1,17 @@
+/* mat-card {
+  width: 80%;
+  margin: auto;
+} */
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.example-form {
+  width: 100%;
+}
+
+mat-form-field, textarea.example-full-width {
+  width: 100%;
+}
