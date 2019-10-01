@@ -1,1 +1,28 @@
-<p>post-create works!</p>
+<!-- <p>post-create works!</p> -->
+
+<mat-card>
+  <form #postForm="ngForm" (submit)="onSubmit(postForm)" class="example-form">
+    <mat-form-field>
+      <input
+      placeholder="Post Title"
+      #titleInput ="ngModel"
+      matInput
+      [(ngModel)]=post.title
+      name="title" required/>
+      <mat-error *ngIf="titleInput.invalid">oops, post title cannot be empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      #contentInput = "ngModel"
+      matInput
+      rows="6"
+      [(ngModel)]=post.content
+      name="content"
+      placeholder="leave a comment"
+      required
+      class="example-full-width"></textarea>
+      <mat-error *ngIf="contentInput.invalid">oops, post content cannot be empty</mat-error>
+    </mat-form-field>
+    <button color="primary" mat-raised-button>Save Post</button>
+  </form>
+</mat-card>
