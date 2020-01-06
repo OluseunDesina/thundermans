@@ -1,4 +1,25 @@
 <!-- <p>header works!</p> -->
 <mat-toolbar color="primary">
-  <span>Better App</span>
+  <span>
+    <a [routerLink]="['/']" routerLinkActive="mat-accent">
+      Better App
+    </a>
+  </span>
+  <span class="example-fill-remaining-space"></span>
+  <span>
+    <ul>
+      <li *ngIf="userIsAuth">
+        <a mat-button [routerLink]="['/add-post']" routerLinkActive="mat-accent">New Post</a>
+      </li>
+      <li *ngIf="!userIsAuth">
+        <a mat-button [routerLink]="['/login']" routerLinkActive="mat-accent">Login</a>
+      </li>
+      <li *ngIf="!userIsAuth">
+        <a mat-button [routerLink]="['/sign-up']" routerLinkActive="mat-accent">SignUp</a>
+      </li>
+      <li *ngIf="userIsAuth">
+        <button mat-button (click)="onLogout()">Log Out</button>
+      </li>
+    </ul>
+  </span>
 </mat-toolbar>
