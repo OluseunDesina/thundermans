@@ -1,19 +1,70 @@
 <!-- <p>post-list works!</p> -->
-
-<mat-accordion *ngIf='posts.length > 0; else elseBlock'>
-  <mat-expansion-panel *ngFor="let post of posts;">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ post.title }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <p>{{ post.content }}</p>
-    <mat-action-row>
-      <button mat-button color="primary">EDIT</button>
-      <button mat-button color="warn">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<ng-template #elseBlock>
-  <p class="info-text mat-body-1"> Hmm, no post added yet!</p>
+<!-- <mat-spinner *ngIf="isLoading; else postBlock"></mat-spinner>
+<ng-template #postBlock>
+  <mat-accordion *ngIf='totalPosts > 0; else noPostBlock'>
+    <mat-expansion-panel *ngFor="let post of posts;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ post.title }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="image-holder">
+        <img [src]='post.imagePath' [alt]='post.title'>
+      </div>
+      <p>{{ post.content }}</p>
+      <mat-action-row *ngIf="userIsAuth && (userId === post.user)">
+        <button [routerLink]="[ '/edit', post.id ]"mat-button color="primary">EDIT</button>
+        <button (click)="onDelete(post.id)" mat-button color="warn">DELETE</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <ng-template #noPostBlock>
+    <p class="info-text mat-body-1"> Hmm, no post added yet!</p>
+  </ng-template>
 </ng-template>
+<mat-paginator *ngIf='totalPosts > 0'
+[length] = "totalPosts"
+[pageSizeOptions]="pageSizeOptions"
+[pageSize] = "pageSize"
+(page)="onPageChange($event)"
+></mat-paginator> -->
+<div *ngFor="let post of posts">
+  <div class="uk-card uk-card-default">
+    <div class="uk-card-header">
+      <div class="uk-grid-small uk-flex-middle" uk-grid>
+        <div class="uk-width-auto">
+          <img class="uk-border-circle" width="40" height="40" [src]="post?.imagePath" />
+        </div>
+        <div class="uk-width-expand">
+          <h3 class="uk-card-title uk-margin-remove-bottom">{{ post?.user?.username }}</h3>
+          <p class="uk-text-meta uk-margin-remove-top">
+            <time datetime="2016-04-01T19:00">{{ timeFromNow(post?.created) }}</time>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="uk-card-media-top">
+      <img (dblclick)="onLikePost(post)" [src]="post?.imagePath" alt="post?.title" />
+    </div>
+    <div class="uk-card-body">
+      <p>{{ post?.content }}</p>
+    </div>
+    <div class="uk-card-footer">
+      <button
+        (click)="onLikePost(post)"
+        [ngClass]="!checkUserInLikes(post.likes) ? 'notLiked' : 'liked'"
+        mat-icon-button
+        aria-label="Example icon-button with a heart icon"
+      >
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+      <span>{{ post?.totalLikes }}</span>
+      <button mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>chat</mat-icon>
+      </button>
+      <span>{{ post?.comments.length }}</span>
+
+      <!-- <a href="#" class="uk-button uk-button-text">Read more</a> -->
+    </div>
+  </div>
+</div>

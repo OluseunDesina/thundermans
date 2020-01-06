@@ -3,6 +3,27 @@
   margin-top: 1rem;
 }
 
+mat-paginator {
+  margin: 1rem;
+}
+
 .info-text {
   text-align: center;
+}
+
+.image-holder {
+  width: 100%;
+}
+
+.image-holder>img {
+  width: 100%;
+  box-shadow: 1px, 1px, 5px rgba(0, 0, 0, 0.5);
+}
+
+.notLiked {
+  color: black
+}
+
+.liked {
+  color: blue
 }

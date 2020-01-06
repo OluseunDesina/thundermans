@@ -12,6 +12,16 @@
   width: 100%;
 }
 
-mat-form-field, textarea.example-full-width {
+mat-form-field,
+textarea.example-full-width {
   width: 100%;
+}
+
+.preview {
+  height: 5rem;
+  margin: 1rem, 0;
+}
+
+.preview img {
+  height: 100%;
 }

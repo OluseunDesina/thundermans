@@ -1,0 +1,15 @@
+.example-fill-remaining-space {
+  flex: 1 1 auto
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
