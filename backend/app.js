@@ -10,24 +10,15 @@ const mongoose = require("mongoose");
 const config = require("./config/config");
 
 const app = express();
-// mongoose.Promise = global.Promise
-// mongoose.connect("mongodb+srv://seun:u176CB7h4waFJqmV@cluster0-cwm4l.mongodb.net/better-guy?retryWrites=true&w=majority", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   })
-//   .then(() => {
-//     console.log(`connected to DB`)
-//   })
-//   .catch((err) => {
-//     console.log(`error connecting to Database`);
-//     console.log(err);
-//   })
-
+mongoose.Promise = global.Promise;
 mongoose
-  .connect(config.db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(
+    "mongodb+srv://seun:u176CB7h4waFJqmV@cluster0-cwm4l.mongodb.net/better-guy?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
   .then(() => {
     console.log(`connected to DB`);
   })
@@ -35,6 +26,19 @@ mongoose
     console.log(`error connecting to Database`);
     console.log(err);
   });
+
+// mongoose
+//   .connect(config.db, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   })
+//   .then(() => {
+//     console.log(`connected to DB`);
+//   })
+//   .catch(err => {
+//     console.log(`error connecting to Database`);
+//     console.log(err);
+//   });
 
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -52,9 +56,11 @@ app.use(cors(corOptions));
 app.use(logger("combined"));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use("/images", express.static(path.join("backend/images")));
 
 app.use("/api/posts", postRoutes);
